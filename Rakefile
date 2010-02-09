@@ -5,12 +5,14 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "smirk"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "james@jkmillertech.com"
+    gem.summary = %Q{Ruby wrapper for the SmugMug API}
+    gem.description = %Q{Smirk is a simple ruby wrapper for the SmugMug 1.2.2 API specification. It currently supports initiating a session and getting all album information.}
+    gem.email = "james@jk-tech.com"
     gem.homepage = "http://github.com/bensie/smirk"
     gem.authors = ["James Miller"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.add_development_dependency "shoulda", ">= 0"
+    gem.add_dependency "rest-client", '~> 1.2.0'
+    gem.add_dependency "json", '~> 1.2.0'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
