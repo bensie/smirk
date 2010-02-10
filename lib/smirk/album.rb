@@ -14,7 +14,7 @@ module Smirk
     
     def images
       params = {:APIKey => Smirk::Client::API_KEY, :method => "smugmug.images.get", :SessionID => session_id, :AlbumID => id, :AlbumKey => key }
-      json = JSON.parse(get("http://#{Smirk::Client::HOST}/", params))["Album"]["Images"]
+      json = get(Smirk::Client::HOST, params)["Album"]["Images"]
       json.inject([]) do |images, i|
         images << Smirk::Image.new(i["id"], i["Key"], session_id)
       end

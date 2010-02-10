@@ -19,17 +19,17 @@ module Smirk
       @user = user
       @password = password
       params = { :method => "smugmug.login.withPassword", :APIKey => API_KEY, :EmailAddress => user, :Password => password }
-      @session_id = JSON.parse(get("https://#{HOST}/", params))['Login']['Session']['id']
+      @session_id = get(HOST, params, true)['Login']['Session']['id']
     end
     
     def logout
       params = default_params.merge!(:method => "smugmug.logout")
-      JSON.parse(get("http://#{host}/", params))
+      get(HOST, params)
     end
     
     def albums
       params = default_params.merge!(:method => "smugmug.albums.get")
-      json = JSON.parse(get("http://#{HOST}/", params))["Albums"]
+      json = get(HOST, params)["Albums"]
       json.inject([]) do |albums, a|
         albums << Smirk::Album.new(a["id"], a["Key"], a["Title"], a["Category"]["id"], a["Category"]["Name"], session_id)
       end
@@ -37,8 +37,9 @@ module Smirk
     
     private
   
-    def get(uri, params = {})
-      RestClient.post uri, params
+    def get(uri, params = {}, ssl = false)
+      proto = ssl ? "https://" : "http://"
+      JSON.parse(RestClient.post proto+uri, params)
     end
     
     def default_params
