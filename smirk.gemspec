@@ -23,6 +23,8 @@ Gem::Specification.new do |s|
      "VERSION",
      "lib/smirk.rb",
      "lib/smirk/client.rb",
+     "lib/smirk/album.rb",
+     "lib/smirk/image.rb",
      "test/helper.rb",
      "test/test_smirk.rb"
   ]
