@@ -6,7 +6,7 @@ module Smirk
     HOST = "api.smugmug.com/services/api/json/1.2.2/"
   
     def self.version
-      '0.0.1'
+      '0.0.2'
     end
  
     def self.gem_version_string
