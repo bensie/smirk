@@ -1,8 +1,6 @@
 module Smirk
   class Image < Client
     
-    attr_reader :session_id
-    
     def initialize(session_id, info)
       info.each do |key, value|
         instance_variable_set("@#{key.downcase}", value)
