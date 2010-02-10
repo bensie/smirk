@@ -1,13 +1,15 @@
 module Smirk
   class Category < Client
     
-    attr_reader :id, :name, :nice_name, :kind, :session_id
+    attr_reader :session_id
     
-    def initialize(id, name, nice_name, kind, session_id)
-      @id = id
-      @name = name
-      @nice_name = nice_name
-      @kind = kind
+    def initialize(session_id, info)
+      info.each do |key, value|
+        instance_variable_set("@#{key.downcase}", value)
+        Category.instance_eval do
+          attr_reader key.downcase.to_sym
+        end
+      end
       @session_id = session_id
     end
     

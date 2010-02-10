@@ -1,14 +1,15 @@
 module Smirk
   class Album < Client
     
-    attr_reader :id, :key, :title, :category_id, :category_name, :session_id
+    attr_reader :session_id
     
-    def initialize(id, key, title, category_id, category_name, session_id)
-      @id = id
-      @key = key
-      @title = title
-      @category_id = category_id
-      @category_name = category_name
+    def initialize(session_id, info)
+      info.each do |key, value|
+        instance_variable_set("@#{key.downcase}", value)
+        Album.instance_eval do
+          attr_reader key.downcase.to_sym
+        end
+      end
       @session_id = session_id
     end
     
@@ -16,7 +17,7 @@ module Smirk
       params = default_params.merge!({:method => "smugmug.images.get", :AlbumID => id, :AlbumKey => key})
       json = get(HOST, params)["Album"]["Images"]
       json.inject([]) do |images, i|
-        images << Smirk::Image.new(i["id"], i["Key"], session_id)
+        images << Smirk::Image.new(session_id, i)
       end
     end
     

@@ -1,11 +1,15 @@
 module Smirk
   class Image < Client
     
-    attr_reader :id, :key, :session_id
+    attr_reader :session_id
     
-    def initialize(id, key, session_id)
-      @id = id
-      @key = key
+    def initialize(session_id, info)
+      info.each do |key, value|
+        instance_variable_set("@#{key.downcase}", value)
+        Image.instance_eval do
+          attr_reader key.downcase.to_sym
+        end
+      end
       @session_id = session_id
     end
     
