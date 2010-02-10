@@ -5,14 +5,6 @@ module Smirk
     API_KEY = "26Kw6kit9TBk2yFcYEwv2wWajATGYs1F"
     HOST = "api.smugmug.com/services/api/json/1.2.2/"
   
-    def self.version
-      '0.0.3'
-    end
- 
-    def self.gem_version_string
-      "smirk-gem/#{version}"
-    end
-  
     attr_reader :user, :password, :session_id
  
     def initialize(user, password)
