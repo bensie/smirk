@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{smirk}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["James Miller"]
   s.date = %q{2010-02-09}
-  s.description = %q{Smirk is a simple ruby wrapper for the SmugMug 1.2.2 API specification. It currently supports initiating a session and getting all album information.}
+  s.description = %q{Smirk is a simple ruby wrapper for the SmugMug 1.2.2 API specification. It currently supports initiating a session, finding albums, images, and categories.}
   s.email = %q{james@jk-tech.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "lib/smirk/client.rb",
      "lib/smirk/album.rb",
      "lib/smirk/image.rb",
+     "lib/smirk/category.rb",
      "test/helper.rb",
      "test/test_smirk.rb"
   ]
