@@ -5,7 +5,7 @@ module Smirk
     API_KEY = "26Kw6kit9TBk2yFcYEwv2wWajATGYs1F"
     HOST = "api.smugmug.com/services/api/json/1.2.2/"
   
-    attr_reader :user, :password, :session_id
+    attr_reader :session_id
  
     def initialize(user, password)
       @user = user
