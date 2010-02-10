@@ -50,8 +50,8 @@ module Smirk
     end
     
     def find_image(id, key)
-      params = default_params.merge!({:method => "smugmug.albums.getInfo", :ImageID => id, :ImageKey => key})
-      a = get(HOST, params)["Image"]
+      params = default_params.merge!({:method => "smugmug.images.getInfo", :ImageID => id, :ImageKey => key})
+      i = get(HOST, params)["Image"]
       Smirk::Image.new(i["id"], i["Key"], session_id)
     end
     
