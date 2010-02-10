@@ -35,6 +35,26 @@ module Smirk
       end
     end
     
+    def categories
+      params = default_params.merge!(:method => "smugmug.categories.get")
+      json = get(HOST, params)["Categories"]
+      json.inject([]) do |categories, c|
+        categories << Smirk::Category.new(c["id"], c["Name"], c["NiceName"], c["Type"], session_id)
+      end
+    end
+    
+    def find_album(id, key)
+      params = default_params.merge!({:method => "smugmug.albums.getInfo", :AlbumID => id, :AlbumKey => key})
+      a = get(HOST, params)["Album"]
+      Smirk::Album.new(a["id"], a["Key"], a["Title"], a["Category"]["id"], a["Category"]["Name"], session_id)
+    end
+    
+    def find_image(id, key)
+      params = default_params.merge!({:method => "smugmug.albums.getInfo", :ImageID => id, :ImageKey => key})
+      a = get(HOST, params)["Image"]
+      Smirk::Image.new(i["id"], i["Key"], session_id)
+    end
+    
     private
   
     def get(uri, params = {}, ssl = false)
