@@ -13,8 +13,8 @@ module Smirk
     end
     
     def images
-      params = {:APIKey => Smirk::Client::API_KEY, :method => "smugmug.images.get", :SessionID => session_id, :AlbumID => id, :AlbumKey => key }
-      json = get(Smirk::Client::HOST, params)["Album"]["Images"]
+      params = default_params.merge!({:method => "smugmug.images.get", :AlbumID => id, :AlbumKey => key})
+      json = get(HOST, params)["Album"]["Images"]
       json.inject([]) do |images, i|
         images << Smirk::Image.new(i["id"], i["Key"], session_id)
       end

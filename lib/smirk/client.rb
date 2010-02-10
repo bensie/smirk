@@ -43,7 +43,7 @@ module Smirk
     end
     
     def default_params
-      { :APIKey => Smirk::Client::API_KEY, :SessionID => session_id }
+      { :APIKey => API_KEY, :SessionID => session_id }
     end
   end
 end
