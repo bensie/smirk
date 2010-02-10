@@ -1,7 +1,35 @@
 = smirk
 
-Description goes here.
+Smirk is a Ruby wrapper around the SmugMug 1.2.2 API.  You can access the albums, images, and categories behind
+an authenticated account.
 
+== Usage
+
+First, you need to start a session with your SmugMug username and password.
+
+  smug = Smirk::Client.new("you@example.com", "mypassword")
+  
+You can call albums, categories, find_image, and find_album methods on a Client object.
+
+  smug.albums.map(&:title).join(", ")
+  => "Trees, Flowers, Birds"
+  
+  smug.categories.map(&:nicename).join(", ")
+  => "Airplanes, Animals, Aquariums, Architecture, Art"
+
+You can gather all the images within albums.  
+  
+  smug.albums.each do |a|
+    a.images.map(&:filename).join(", ")
+  end
+  => "IMG_513.jpg, IMG_514.jpg, IMG_515.jpg"
+
+When you're done, you should logout to terminate the session:
+
+  smug.logout
+  
+More documentation to come.
+  
 == Note on Patches/Pull Requests
  
 * Fork the project.
