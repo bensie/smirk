@@ -19,7 +19,7 @@ module Smirk
       get(params)
     end
     
-    def albums(heavy => false)
+    def albums(heavy = false)
       params = default_params.merge!({:method => "smugmug.albums.get", :Heavy => heavy})
       json = get(params)["Albums"]
       json.inject([]) do |albums, a|
