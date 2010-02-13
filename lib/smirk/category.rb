@@ -3,7 +3,7 @@ module Smirk
     
     def initialize(session_id, info)
       info.each do |key, value|
-        instance_variable_set("@#{key.downcase}", value)
+        instance_variable_set("@#{key}", value)
         Category.instance_eval do
           attr_reader key.downcase.to_sym
         end

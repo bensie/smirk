@@ -1,8 +1,4 @@
 module Smirk
-  
-  def method_missing(name, *args)
-    puts "Woo!"
-  end
 
   class Client
   
