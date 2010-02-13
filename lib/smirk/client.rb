@@ -1,4 +1,8 @@
 module Smirk
+  
+  def method_missing(name, *args)
+    puts "Woo!"
+  end
 
   class Client
   
@@ -23,7 +27,7 @@ module Smirk
       params = default_params.merge!({:method => "smugmug.albums.get", :Heavy => heavy})
       json = get(params)["Albums"]
       json.inject([]) do |albums, a|
-        albums << Smirk::Album.new(session_id, a)
+        albums << Smirk::Album.new(session_id, upper_hash_to_lower_hash(a))
       end
     end
     
@@ -31,20 +35,20 @@ module Smirk
       params = default_params.merge!(:method => "smugmug.categories.get")
       json = get(params)["Categories"]
       json.inject([]) do |categories, c|
-        categories << Smirk::Category.new(session_id, c)
+        categories << Smirk::Category.new(session_id, upper_hash_to_lower_hash(c))
       end
     end
     
     def find_album(id, key)
       params = default_params.merge!({:method => "smugmug.albums.getInfo", :AlbumID => id, :AlbumKey => key})
       a = get(params)["Album"]
-      Smirk::Album.new(session_id, a)
+      Smirk::Album.new(session_id, upper_hash_to_lower_hash(a))
     end
     
     def find_image(id, key)
       params = default_params.merge!({:method => "smugmug.images.getInfo", :ImageID => id, :ImageKey => key})
       i = get(params)["Image"]
-      Smirk::Image.new(session_id, i)
+      Smirk::Image.new(session_id, upper_hash_to_lower_hash(i))
     end
     
     private
@@ -57,5 +61,18 @@ module Smirk
     def default_params
       { :APIKey => API_KEY, :SessionID => session_id }
     end
+    
+    def upper_hash_to_lower_hash(upper)
+      if Hash === upper
+        lower = {}
+        upper.each_pair do |key, value|
+          lower[key.downcase.to_sym] = upper_hash_to_lower_hash(value)
+        end
+        lower
+      else
+        upper
+      end
+    end
+    
   end
 end
