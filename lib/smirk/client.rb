@@ -51,7 +51,7 @@ module Smirk
   
     def get(params = {}, ssl = false)
       proto = ssl ? "https://" : "http://"
-      JSON.parse(RestClient.post proto+HOST, params)
+      JSON.parse(RestClient.post(proto+HOST, params))
     end
     
     def default_params
