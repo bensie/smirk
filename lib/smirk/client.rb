@@ -47,6 +47,12 @@ module Smirk
       Smirk::Image.new(session_id, upper_hash_to_lower_hash(i))
     end
     
+    def find_image_exif(id, key)
+      params = default_params.merge!({:method => "smugmug.images.getEXIF", :ImageID => id, :ImageKey => key})
+      i = get(params)["Image"]
+      Smirk::Image.new(session_id, upper_hash_to_lower_hash(i))
+    end
+    
     private
   
     def get(params = {}, ssl = false)
