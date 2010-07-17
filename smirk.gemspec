@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name = "smirk"
-  s.version = "0.2.1"
+  s.version = "0.2.2"
   s.authors = ["James Miller"]
-  s.date = "2010-05-18"
+  s.date = "2010-07-17"
   s.summary = %q{Ruby wrapper for the SmugMug API}
   s.description = %q{Smirk is a simple Ruby wrapper for the SmugMug 1.2.2 API specification. It currently supports initiating a session, finding albums, images, and categories.}
   s.homepage = "http://github.com/bensie/smirk"
